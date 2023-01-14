@@ -9,7 +9,7 @@ exports.fetchTodo = async (req, res) => {
             return res.send(data)
         }
         else {
-            return res.send('Data is not available!')
+            return res.status(204).json({RES: 'Data is not available!'})
         }
     } catch (error) {
         return res.status(500).send("Something went wrong!");
