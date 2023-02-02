@@ -4,7 +4,8 @@ exports.fetchTodo = async (req, res) => {
     let page = +req.query.page || 1;
     let limit = +req.query.limit || 100;
     try {
-        const data = await TodoModel.find({ user: req.userId.data }).skip((page - 1) * limit).limit(limit);
+        const data = await TodoModel.find({ user: req.userId.data })
+        .skip((page - 1) * limit).limit(limit);
         res.send(data)
     } catch (error) {
         return res.status(500).json({Error: "Something went wrong!"});
