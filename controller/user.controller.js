@@ -36,7 +36,7 @@ exports.loginUser = async(req,res)=>{
             return res.status(400).json({ error: "Wrong Password!" });
         }
         const payload = user[0].id;
-        const token = JWT.sign({data: payload},JWT_SECRET,{expiresIn: '60s'})
+        const token = JWT.sign({data: payload},JWT_SECRET,{expiresIn: '7d'})
         const refresh_token = JWT.sign({data: payload},JWT_REFRESH_SECRET,{expiresIn: '28d'})
         const username = user[0].username;
         // console.log(user[0].username)
@@ -54,7 +54,7 @@ exports.token = async (req,res)=>{
                 if(err){
                     return res.status(401).json({"error": true, "message": "Login required!"})
                 }
-                const token = JWT.sign({data: decode}, JWT_SECRET, {expiresIn: '60s'});
+                const token = JWT.sign({data: decode}, JWT_SECRET, {expiresIn: '7d'});
                 res.send({token})
         })
     } else{
