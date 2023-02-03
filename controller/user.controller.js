@@ -37,6 +37,9 @@ exports.loginUser = async(req,res)=>{
         }
         const payload = user[0].id;
         const token = JWT.sign({data: payload},JWT_SECRET,{expiresIn: '7d'})
+        res.cookie('token',JSON.stringify(token),{
+            httpOnly: true
+        })
         const refresh_token = JWT.sign({data: payload},JWT_REFRESH_SECRET,{expiresIn: '28d'})
         const username = user[0].username;
         // console.log(user[0].username)
